@@ -1,6 +1,9 @@
 # 1: Using node:alpine as the base
 FROM node:8.12.0-alpine
 
+# Setup NGINX
+RUN mkdir -p /usr/share/nginx/ && mkdir -p /run/nginx && mkdir -p /var/log/nginx/ && apk add git yarn nginx
+
 # 2: Setting the application path to our work dir
 WORKDIR /usr/app
 
@@ -14,7 +17,7 @@ RUN set -ex \
   && npm install -g check-dependencies
 
 # 5: Install git and yarn
-RUN apk add git yarn
+# RUN apk add git yarn
 
 # 6: Make it so we can run bower as root
 RUN echo '{ "allow_root": true }' > /root/.bowerrc
